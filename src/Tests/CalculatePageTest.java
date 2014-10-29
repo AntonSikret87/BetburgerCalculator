@@ -189,4 +189,32 @@ public class CalculatePageTest extends BaseTest {
         assertEquals("0.00", getDriver().findElement(By.id("revenue2")).getText());
         assertEquals("-3.00", getDriver().findElement(By.id("revenue3")).getText());
     }
+    @Test(groups = {"good"})
+    public void Outcome3Formula5Value3AllFields() throws InterruptedException, IOException {
+        CalculatePageTest testPage = new CalculatePageTest();
+        testPage.GoToCalculate();
+        CalculatePage test = new CalculatePage();
+        test.OutcomeFieldValue3FirstFormula();
+        String formula = "# 4 TO(2)-TU(2.5)-TU(1.5)";
+        assertEquals(formula, getDriver().findElement(By.cssSelector("#formula_select > option[value=\"26\"]")).getText());
+        test.FormulaDropDown(formula);
+        CalculatePageTest testPage1 = new CalculatePageTest();
+        testPage1.FillAllOdds();
+        CalculatePageTest testPage2 = new CalculatePageTest();
+        testPage2.FillAllComission();
+        CalculatePageTest testPage3 = new CalculatePageTest();
+        testPage3.FillAllRoundTo();
+        CalculatePageTest testPage4 = new CalculatePageTest();
+        testPage4.FillAllStake();
+        test.CalculateBTN();
+        assertEquals("5.82", getDriver().findElement(By.id("revenue1")).getText());
+        assertEquals("0.00", getDriver().findElement(By.id("revenue2")).getText());
+        assertEquals("-3.00", getDriver().findElement(By.id("revenue3")).getText());
+
+
+        assertEquals("Profit Percent 47.00", getDriver().findElement(By.cssSelector("small")).getText());
+        assertEquals("5.82", getDriver().findElement(By.id("revenue1")).getText());
+        assertEquals("0.00", getDriver().findElement(By.id("revenue2")).getText());
+        assertEquals("-3.00", getDriver().findElement(By.id("revenue3")).getText());
+    }
 }
